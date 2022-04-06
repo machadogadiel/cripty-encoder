@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="./css/index.css" />
+
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cripty</title>
+  </head>
+
+  <body>
+    <header>
+      <h1 class="logo">Cripty</h1>
+    </header>
+
+    <div class="content-container">
+        <form class="form">
+            <div class="input-container">
+                <label for="">Plaintext to encode:</label>
+                <textarea name="decoded-text" id="decoded-text"></textarea>
+            </div>
+        
+            <div class="options-container">
+                <label for="">Type</label>
+
+                <select id="cypher-type">
+                  <option selected>Base64</option>
+                  <option>Caesar</option>
+                </select>
+
+                <div id="options">
+                    <label for="encode-radio">Encode</label>
+                    <input type="radio" name="radio" id="encode-radio" onchange="updateBtnName()" checked>
+
+                    <label for="decode-radio">Decode</label>
+                    <input type="radio" name="radio" id="decode-radio" onchange="updateBtnName()">
+                </div>
+
+                <input type="submit" value="Encode message" id="submit-btn">
+            </div>
+
+            <div class="result-container">
+                <label for="encoded-text">Your encoded text:</label>
+                <textarea name="encoded-text" id="encoded-text"></textarea>
+            </div>
+        </form>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="./js/index.js"></script>
+  </body>
+</html>

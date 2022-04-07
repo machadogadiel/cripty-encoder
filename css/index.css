@@ -81,3 +81,9 @@ select {
     background-color: white;
     border-radius: 5px;
 }
+
+@media only screen and (max-width: 1000px) {
+    .form {
+        flex-direction: column;
+    }
+  }

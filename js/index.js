@@ -1,15 +1,5 @@
-// not the most optimal solution since everytime you add a new item the index changes and breaks the whole code.
-var elemArray = document.querySelectorAll(
-    "#cypher-type, #options, #encode-radio, #decode-radio, #submit-btn, #decoded-text, #encoded-text"
-);
+var elemArray = document.querySelectorAll("#cypher-type, #options, #encode-radio, #decode-radio, #submit-btn, #decoded-text, #encoded-text");
 
-// 0. the textarea for the plaintext (input)
-// 1. the <select> element
-// 2. the options <div> which contains the radio-buttons
-// 3. the encode radio button
-// 4. the decode radio button
-// 5. the submit button 
-// 6. the textarea for our encoded text (output)
 const decodedTextElement = elemArray[0];
 const typeSelectElement = elemArray[1];
 const optionsElement = elemArray[2];
@@ -49,7 +39,6 @@ function initListeners() {
                 );
 
             } else {
-
                 encodedTextElement.value = caesarCipher(
                     decodedTextElement.value,
                     parseInt(document.getElementById("caesar-shift").value) * -1
@@ -82,7 +71,7 @@ function caesarCipher(input, shift) {
     let encodedText = [];
 
     if (shift < 0) {
-        shift += 26;
+        return caesarCipher(input, shift + 26)
     }
 
     for (let i = 0; i < input.length; i++) {
@@ -116,9 +105,16 @@ function isEncode() {
 }
 
 function updateBtnName() {
+    
+    encodedTextElement.value = decodedTextElement.value
+
+
     if (isEncode()) {
         submitBtnElement.setAttribute("value", "encode message");
+
+        
     } else {
         submitBtnElement.setAttribute("value", "decode message");
     }
 }
+

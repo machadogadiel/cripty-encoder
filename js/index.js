@@ -29,7 +29,11 @@ function initListeners() {
             if (isEncode()) {
                 encodedTextElement.value = btoa(decodedTextElement.value.toString());
             } else {
+<<<<<<< HEAD
                 encodedTextElement.value = atob(encodedTextElement.value.toString());
+=======
+                encodedTextElement.value = atob(encodedTextElement.value);
+>>>>>>> parent of 94c4939 (fix decode result)
             }
         } else {
             if (isEncode()) {

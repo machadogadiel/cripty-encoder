@@ -1,4 +1,4 @@
-var elemArray = document.querySelectorAll("#cypher-type, #options, #encode-radio, #decode-radio, #submit-btn, #decoded-text, #encoded-text");
+var elemArray = document.querySelectorAll("#cipher-type, #options, #encode-radio, #decode-radio, #submit-btn, #decoded-text, #encoded-text");
 
 const decodedTextElement = elemArray[0];
 const typeSelectElement = elemArray[1];
@@ -27,9 +27,9 @@ function initListeners() {
 
         if (typeSelectElement.selectedIndex == 0) {
             if (isEncode()) {
-                encodedTextElement.value = btoa(decodedTextElement.value);
+                encodedTextElement.value = btoa(decodedTextElement.value.toString());
             } else {
-                decodedTextElement.value = atob(encodedTextElement.value);
+                encodedTextElement.value = atob(encodedTextElement.value.toString());
             }
         } else {
             if (isEncode()) {
@@ -105,16 +105,9 @@ function isEncode() {
 }
 
 function updateBtnName() {
-    
-    encodedTextElement.value = decodedTextElement.value
-
-
     if (isEncode()) {
         submitBtnElement.setAttribute("value", "encode message");
-
-        
     } else {
         submitBtnElement.setAttribute("value", "decode message");
     }
 }
-

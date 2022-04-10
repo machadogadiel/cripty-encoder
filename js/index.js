@@ -13,7 +13,7 @@ console.log(elemArray);
 initListeners();
 
 function initListeners() {
-    typeSelectElement.addEventListener("change", function () {
+    typeSelectElement.addEventListener("change", function() {
         if (typeSelectElement.selectedIndex == 0) {
             document.getElementById("caesar-shift").remove();
             document.getElementById("shift-label").remove();
@@ -22,27 +22,23 @@ function initListeners() {
         }
     });
 
-    submitBtnElement.addEventListener("click", function (event) {
+    submitBtnElement.addEventListener("click", function(event) {
         event.preventDefault();
+
+        let decodedText = decodedTextElement.value
+        let shift = parseInt(document.getElementById("caesar-shift").value)
 
         if (typeSelectElement.selectedIndex == 0) {
             if (isEncode()) {
-                encodedTextElement.value = btoa(decodedTextElement.value.toString());
+                encodedTextElement.value = btoa(decodedText);
             } else {
-                encodedTextElement.value = atob(decodedTextElement.value.toString());
+                encodedTextElement.value = atob(decodedText);
             }
         } else {
             if (isEncode()) {
-                encodedTextElement.value = caesarCipher(
-                    decodedTextElement.value,
-                    parseInt(document.getElementById("caesar-shift").value)
-                );
-
+                encodedTextElement.value = caesarCipher(decodedText, shift);
             } else {
-                encodedTextElement.value = caesarCipher(
-                    decodedTextElement.value,
-                    parseInt(document.getElementById("caesar-shift").value) * -1
-                );
+                encodedTextElement.value = caesarCipher(decodedText, shift * -1);
             }
         }
     });
@@ -66,7 +62,6 @@ function addShiftElement() {
     optionsElement.appendChild(caesarShiftInput);
 }
 
-// it encodes normal text to caesar cipher 
 function caesarCipher(input, shift) {
     let encodedText = [];
 
@@ -87,12 +82,12 @@ function caesarCipher(input, shift) {
         if (isAsciiLetterLowercase) {
             encodedText.push(String.fromCharCode(((asciiLetter - 97 + shift) % 26) + 97));
         }
-        
+
         if (isAsciiLetterUppercase) {
             encodedText.push(String.fromCharCode(((asciiLetter - 65 + shift) % 26) + 65));
         }
     }
-
+    
     return encodedText.join("");
 }
 

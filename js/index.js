@@ -29,7 +29,7 @@ function initListeners() {
             if (isEncode()) {
                 encodedTextElement.value = btoa(decodedTextElement.value.toString());
             } else {
-                decodedTextElement.value = atob(decodedTextElement.value.toString());
+                encodedTextElement.value = atob(decodedTextElement.value.toString());
             }
         } else {
             if (isEncode()) {

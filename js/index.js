@@ -13,7 +13,7 @@ console.log(elemArray);
 initListeners();
 
 function initListeners() {
-    typeSelectElement.addEventListener("change", function () {
+    typeSelectElement.addEventListener("change", function() {
         if (typeSelectElement.selectedIndex == 0) {
             document.getElementById("caesar-shift").remove();
             document.getElementById("shift-label").remove();
@@ -22,7 +22,7 @@ function initListeners() {
         }
     });
 
-    submitBtnElement.addEventListener("click", function (event) {
+    submitBtnElement.addEventListener("click", function(event) {
         event.preventDefault();
 
         const decodedText = decodedTextElement.value
@@ -80,8 +80,13 @@ function caesarCipher(input, shift) {
             encodedText += String.fromCharCode(((asciiLetter - 65 + shift) % 26) + 65);
         }
     }
+<<<<<<< HEAD
 
     return encodedText;
+=======
+    
+    return encodedText.join("");
+>>>>>>> e1c3dba6f95aa185159e6e923aad85423a9fc7eb
 }
 
 function isEncode() {
@@ -89,5 +94,14 @@ function isEncode() {
 }
 
 function updateBtnName() {
+<<<<<<< HEAD
     submitBtnElement.value = isEncode() ? "encode message" : "decode message"
 }
+=======
+    if (isEncode()) {
+        submitBtnElement.setAttribute("value", "encode message");
+    } else {
+        submitBtnElement.setAttribute("value", "decode message");
+    }
+}
+>>>>>>> e1c3dba6f95aa185159e6e923aad85423a9fc7eb

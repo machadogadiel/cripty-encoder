@@ -25,36 +25,25 @@ function initListeners() {
     submitBtnElement.addEventListener("click", function (event) {
         event.preventDefault();
 
-        if (typeSelectElement.selectedIndex == 0) {
-            if (isEncode()) {
-                encodedTextElement.value = btoa(decodedTextElement.value.toString());
-            } else {
-<<<<<<< HEAD
-                encodedTextElement.value = atob(encodedTextElement.value.toString());
-=======
-                encodedTextElement.value = atob(encodedTextElement.value);
->>>>>>> parent of 94c4939 (fix decode result)
-            }
-        } else {
-            if (isEncode()) {
-                encodedTextElement.value = caesarCipher(
-                    decodedTextElement.value,
-                    parseInt(document.getElementById("caesar-shift").value)
-                );
+        const decodedText = decodedTextElement.value
+        const shift = parseInt(document.getElementById("caesar-shift").value)
 
-            } else {
-                encodedTextElement.value = caesarCipher(
-                    decodedTextElement.value,
-                    parseInt(document.getElementById("caesar-shift").value) * -1
-                );
-            }
+        if (typeSelectElement.selectedIndex == 0) {
+            isEncode() ?
+                encodedTextElement.value = btoa(decodedText) :
+                encodedTextElement.value = atob(decodedText)
+
+        } else {
+            isEncode() ?
+                encodedTextElement.value = caesarCipher(decodedText, shift) :
+                encodedTextElement.value = caesarCipher(decodedText, shift * -1);
         }
     });
 }
 
 function addShiftElement() {
-    let caesarShiftLabel = document.createElement("label");
-    let caesarShiftInput = document.createElement("input");
+    const caesarShiftLabel = document.createElement("label");
+    const caesarShiftInput = document.createElement("input");
 
     caesarShiftLabel.innerHTML = "Shift: ";
     caesarShiftLabel.setAttribute("id", "shift-label");
@@ -70,48 +59,39 @@ function addShiftElement() {
     optionsElement.appendChild(caesarShiftInput);
 }
 
-// it encodes normal text to caesar cipher 
 function caesarCipher(input, shift) {
-    let encodedText = [];
+    let encodedText = "";
 
     if (shift < 0) {
         return caesarCipher(input, shift + 26)
     }
 
     for (let i = 0; i < input.length; i++) {
-        let asciiLetter = input.charCodeAt(i);
+        const asciiLetter = input.charCodeAt(i);
 
-        let isAsciiLetterLowercase = asciiLetter >= 97 && asciiLetter <= 122;
-        let isAsciiLetterUppercase = asciiLetter >= 65 && asciiLetter <= 90;
+        const isAsciiLetterLowercase = asciiLetter >= 97 && asciiLetter <= 122;
+        const isAsciiLetterUppercase = asciiLetter >= 65 && asciiLetter <= 90;
 
         if (!isAsciiLetterLowercase && !isAsciiLetterUppercase) {
             encodedText.push(String.fromCharCode(asciiLetter))
         }
 
         if (isAsciiLetterLowercase) {
-            encodedText.push(String.fromCharCode(((asciiLetter - 97 + shift) % 26) + 97));
+            encodedText += String.fromCharCode(((asciiLetter - 97 + shift) % 26) + 97);
         }
-        
+
         if (isAsciiLetterUppercase) {
-            encodedText.push(String.fromCharCode(((asciiLetter - 65 + shift) % 26) + 65));
+            encodedText += String.fromCharCode(((asciiLetter - 65 + shift) % 26) + 65);
         }
     }
 
-    return encodedText.join("");
+    return encodedText;
 }
 
 function isEncode() {
-    if (encodeRadioBtn.checked == true && decodeRadioBtn.checked == false) {
-        return true;
-    }
-
-    return false;
+    return encodeRadioBtn.checked ? true : false;
 }
 
 function updateBtnName() {
-    if (isEncode()) {
-        submitBtnElement.setAttribute("value", "encode message");
-    } else {
-        submitBtnElement.setAttribute("value", "decode message");
-    }
+    submitBtnElement.value = isEncode() ? "encode message" : "decode message"
 }

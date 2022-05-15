@@ -80,13 +80,8 @@ function caesarCipher(input, shift) {
             encodedText += String.fromCharCode(((asciiLetter - 65 + shift) % 26) + 65);
         }
     }
-<<<<<<< HEAD
 
     return encodedText;
-=======
-    
-    return encodedText.join("");
->>>>>>> e1c3dba6f95aa185159e6e923aad85423a9fc7eb
 }
 
 function isEncode() {
@@ -94,14 +89,5 @@ function isEncode() {
 }
 
 function updateBtnName() {
-<<<<<<< HEAD
     submitBtnElement.value = isEncode() ? "encode message" : "decode message"
 }
-=======
-    if (isEncode()) {
-        submitBtnElement.setAttribute("value", "encode message");
-    } else {
-        submitBtnElement.setAttribute("value", "decode message");
-    }
-}
->>>>>>> e1c3dba6f95aa185159e6e923aad85423a9fc7eb

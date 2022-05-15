@@ -59,6 +59,11 @@ header {
     justify-content: center;
 }
 
+.caesar-shift-input {
+    margin: 5px;
+    width: 50px;
+}
+
 input[type=radio] {
     margin: 0px 10px 0px 3px;
 }

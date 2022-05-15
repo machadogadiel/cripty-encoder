@@ -1,4 +1,4 @@
-var elemArray = document.querySelectorAll("#cipher-type, #options, #encode-radio, #decode-radio, #submit-btn, #decoded-text, #encoded-text");
+const elemArray = document.querySelectorAll("#cipher-type, #options, #encode-radio, #decode-radio, #submit-btn, #decoded-text, #encoded-text");
 
 const decodedTextElement = elemArray[0];
 const typeSelectElement = elemArray[1];
@@ -26,17 +26,11 @@ function initListeners() {
         event.preventDefault();
 
         const decodedText = decodedTextElement.value
-        const shift = parseInt(document.getElementById("caesar-shift").value)
-
+        
         if (typeSelectElement.selectedIndex == 0) {
-            isEncode() ?
-                encodedTextElement.value = btoa(decodedText) :
-                encodedTextElement.value = atob(decodedText)
-
+            encodedTextElement.value = isEncode() ? btoa(decodedText) : atob(decodedText) 
         } else {
-            isEncode() ?
-                encodedTextElement.value = caesarCipher(decodedText, shift) :
-                encodedTextElement.value = caesarCipher(decodedText, shift * -1);
+            encodedTextElement.value = isEncode() ? caesarCipher(decodedText, shift) : caesarCipher(decodedText, shift * -1);
         }
     });
 }
@@ -45,15 +39,14 @@ function addShiftElement() {
     const caesarShiftLabel = document.createElement("label");
     const caesarShiftInput = document.createElement("input");
 
-    caesarShiftLabel.innerHTML = "Shift: ";
+    caesarShiftLabel.innerHTML = "Shift:";
     caesarShiftLabel.setAttribute("id", "shift-label");
     caesarShiftLabel.setAttribute("for", "caesar-shift");
 
-    caesarShiftInput.style.width = "50px";
-    caesarShiftInput.style.margin = "5px";
     caesarShiftInput.setAttribute("value", 1);
     caesarShiftInput.setAttribute("type", "number");
     caesarShiftInput.setAttribute("id", "caesar-shift");
+    caesarShiftInput.classList.add("caesar-shift-input");
 
     optionsElement.appendChild(caesarShiftLabel);
     optionsElement.appendChild(caesarShiftInput);
@@ -66,14 +59,17 @@ function caesarCipher(input, shift) {
         return caesarCipher(input, shift + 26)
     }
 
+    // loop through users text
     for (let i = 0; i < input.length; i++) {
+        //we get each letter's ascii code and store it.
         const asciiLetter = input.charCodeAt(i);
 
+        // 
         const isAsciiLetterLowercase = asciiLetter >= 97 && asciiLetter <= 122;
         const isAsciiLetterUppercase = asciiLetter >= 65 && asciiLetter <= 90;
 
         if (!isAsciiLetterLowercase && !isAsciiLetterUppercase) {
-            encodedText.push(String.fromCharCode(asciiLetter))
+            encodedText += String.fromCharCode(asciiLetter)
         }
 
         if (isAsciiLetterLowercase) {

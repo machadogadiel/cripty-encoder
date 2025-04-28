@@ -26,7 +26,7 @@ function initListeners() {
         event.preventDefault();
 
         const decodedText = decodedTextElement.value
-        const shift = parseInt(document.getElementById("caesar-shift").value)
+        const shift = parseInt(document.getElementById("caesar-shift")?.value)
         
         if (typeSelectElement.selectedIndex == 0) {
             encodedTextElement.value = isEncode() ? btoa(decodedText) : atob(decodedText) 
